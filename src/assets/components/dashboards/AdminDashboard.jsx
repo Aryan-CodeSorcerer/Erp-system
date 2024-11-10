@@ -10,23 +10,41 @@ const AdminDashboard = () => {
 
   const [managerName, setManagerName] = useState('');
   const [managerEmail, setManagerEmail] = useState('');
-  
+  const [editingManagerIndex, setEditingManagerIndex] = useState(null);
+
   const [laborName, setLaborName] = useState('');
   const [laborEmail, setLaborEmail] = useState('');
+  const [editingLaborIndex, setEditingLaborIndex] = useState(null);
 
   const navigate = useNavigate();
 
   const handleAddManager = () => {
     setIsAddManagerVisible(!isAddManagerVisible);
+    setEditingManagerIndex(null); // Reset editing mode
+    setManagerName('');
+    setManagerEmail('');
   };
 
   const handleAddLabor = () => {
     setIsAddLaborVisible(!isAddLaborVisible);
+    setEditingLaborIndex(null); // Reset editing mode
+    setLaborName('');
+    setLaborEmail('');
   };
 
   const handleSaveManager = () => {
     const newManager = { name: managerName, email: managerEmail };
-    setManagers([...managers, newManager]);
+
+    if (editingManagerIndex !== null) {
+      // Update existing manager
+      const updatedManagers = [...managers];
+      updatedManagers[editingManagerIndex] = newManager;
+      setManagers(updatedManagers);
+      setEditingManagerIndex(null);
+    } else {
+      // Add new manager
+      setManagers([...managers, newManager]);
+    }
     setManagerName('');
     setManagerEmail('');
     setIsAddManagerVisible(false);
@@ -34,7 +52,17 @@ const AdminDashboard = () => {
 
   const handleSaveLabor = () => {
     const newLabor = { name: laborName, email: laborEmail };
-    setLabors([...labors, newLabor]);
+
+    if (editingLaborIndex !== null) {
+      // Update existing labor
+      const updatedLabors = [...labors];
+      updatedLabors[editingLaborIndex] = newLabor;
+      setLabors(updatedLabors);
+      setEditingLaborIndex(null);
+    } else {
+      // Add new labor
+      setLabors([...labors, newLabor]);
+    }
     setLaborName('');
     setLaborEmail('');
     setIsAddLaborVisible(false);
@@ -54,6 +82,7 @@ const AdminDashboard = () => {
     const manager = managers[index];
     setManagerName(manager.name);
     setManagerEmail(manager.email);
+    setEditingManagerIndex(index);
     setIsAddManagerVisible(true);
   };
 
@@ -61,17 +90,16 @@ const AdminDashboard = () => {
     const labor = labors[index];
     setLaborName(labor.name);
     setLaborEmail(labor.email);
+    setEditingLaborIndex(index);
     setIsAddLaborVisible(true);
   };
 
   const handleLogout = () => {
-    // Implement the logout functionality here
     navigate('/'); // Redirect to login page or perform other logout actions
   };
 
   return (
     <div className="admin-dashboard">
-      {/* Sidebar */}
       <div className="admin-sidebar">
         <h5>Admin Dashboard</h5>
         <ul>
@@ -81,9 +109,7 @@ const AdminDashboard = () => {
         </ul>
       </div>
 
-      {/* Main Content */}
       <div className="admin-main-content">
-        {/* Sales Managers Section */}
         <section id="sales-managers">
           <h3>Sales Managers</h3>
           <button className="action-button" onClick={handleAddManager}>Add New Manager</button>
@@ -101,39 +127,38 @@ const AdminDashboard = () => {
                 value={managerEmail}
                 onChange={(e) => setManagerEmail(e.target.value)}
               />
-              <button onClick={handleSaveManager}>Save</button>
+              <button onClick={handleSaveManager}>
+                {editingManagerIndex !== null ? 'Update' : 'Save'}
+              </button>
             </div>
           )}
           <div>
             <div>Manager List</div>
-            <div>
-              <table className="admin-table">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Actions</th>
+            <table className="admin-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {managers.map((manager, index) => (
+                  <tr key={index}>
+                    <td>{manager.name}</td>
+                    <td>{manager.email}</td>
+                    <td>
+                      <button className="action-button" onClick={() => handleUpdateManager(index)}>Update</button>
+                      <button className="action-button" onClick={() => handleDeleteManager(index)}>Delete</button>
+                      <button className="action-button">View</button>
+                    </td>
                   </tr>
-                </thead>
-                <tbody>
-                  {managers.map((manager, index) => (
-                    <tr key={index}>
-                      <td>{manager.name}</td>
-                      <td>{manager.email}</td>
-                      <td>
-                        <button className="action-button" onClick={() => handleUpdateManager(index)}>Update</button>
-                        <button className="action-button" onClick={() => handleDeleteManager(index)}>Delete</button>
-                        <button className="action-button">View</button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+                ))}
+              </tbody>
+            </table>
           </div>
         </section>
 
-        {/* Labors Section */}
         <section id="labors">
           <h3>Labors</h3>
           <button className="action-button" onClick={handleAddLabor}>Add New Labor</button>
@@ -151,35 +176,35 @@ const AdminDashboard = () => {
                 value={laborEmail}
                 onChange={(e) => setLaborEmail(e.target.value)}
               />
-              <button onClick={handleSaveLabor}>Save</button>
+              <button onClick={handleSaveLabor}>
+                {editingLaborIndex !== null ? 'Update' : 'Save'}
+              </button>
             </div>
           )}
           <div>
             <div>Labor List</div>
-            <div>
-              <table className="admin-table">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Actions</th>
+            <table className="admin-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {labors.map((labor, index) => (
+                  <tr key={index}>
+                    <td>{labor.name}</td>
+                    <td>{labor.email}</td>
+                    <td>
+                      <button className="action-button" onClick={() => handleUpdateLabor(index)}>Update</button>
+                      <button className="action-button" onClick={() => handleDeleteLabor(index)}>Delete</button>
+                      <button className="action-button">View</button>
+                    </td>
                   </tr>
-                </thead>
-                <tbody>
-                  {labors.map((labor, index) => (
-                    <tr key={index}>
-                      <td>{labor.name}</td>
-                      <td>{labor.email}</td>
-                      <td>
-                        <button className="action-button" onClick={() => handleUpdateLabor(index)}>Update</button>
-                        <button className="action-button" onClick={() => handleDeleteLabor(index)}>Delete</button>
-                        <button className="action-button">View</button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+                ))}
+              </tbody>
+            </table>
           </div>
         </section>
       </div>
