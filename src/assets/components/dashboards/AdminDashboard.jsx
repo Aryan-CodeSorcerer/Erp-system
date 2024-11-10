@@ -1,70 +1,95 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import '../styles/index.css'
+import React from 'react';
+// import './AdminDashboard.css'; // Import the CSS file
 
 const AdminDashboard = () => {
-    const [users, setUsers] = useState([
-        { id: 1, name: 'John Doe', role: 'Sales Manager', location: 'Noida' },
-        { id: 2, name: 'Jane Smith', role: 'Labour', location: 'Delhi' },
-    ]);
-    const [newUser, setNewUser] = useState({ name: '', role: '', location: '' });
-    const navigate = useNavigate();
+  const managers = [{ name: 'new', email: 'new@gmail.com' }];
+  const labors = [{ name: 'test', email: 'test@gmail.com' }];
 
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setNewUser((prev) => ({ ...prev, [name]: value }));
-    };
+  return (
+    <div className="admin-dashboard">
+      {/* Sidebar */}
+      <div className="admin-sidebar">
+        <h5>Admin Dashboard</h5>
+        <ul>
+          <li>
+            <a href="#sales-managers">Sales Managers</a>
+          </li>
+          <li>
+            <a href="#labors">Labors</a>
+          </li>
+        </ul>
+      </div>
 
-    const addUser = () => {
-        setUsers([...users, { ...newUser, id: users.length + 1 }]);
-        setNewUser({ name: '', role: '', location: '' });
-    };
+      {/* Main Content */}
+      <div className="admin-main-content">
+        {/* Sales Managers Section */}
+        <section id="sales-managers">
+          <h3>Sales Managers</h3>
+          <button>Add New Manager</button>
+          <div>
+            <div>Manager List</div>
+            <div>
+              <table className="admin-table">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {managers.map((manager, index) => (
+                    <tr key={index}>
+                      <td>{manager.name}</td>
+                      <td>{manager.email}</td>
+                      <td>
+                        <button>Update</button>
+                        <button>Delete</button>
+                        <button>View</button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
 
-    const deleteUser = (id) => {
-        setUsers(users.filter((user) => user.id !== id));
-    };
-
-    const handleLogout = () => {
-        navigate('/');  
-    };
-
-    return (
-        <div className='ad-panel'>
-            <h2>Admin Dashboard</h2>
-            <h3>Manage Users</h3>
-            <input
-                type="text"
-                name="name"
-                placeholder="Name"
-                value={newUser.name}
-                onChange={handleInputChange}
-            />
-            <select name="role" value={newUser.role} onChange={handleInputChange}>
-                <option value="">Select Role</option>
-                <option value="Sales Manager">Sales Manager</option>
-                <option value="Labour">Labour</option>
-            </select>
-            <input
-                type="text"
-                name="location"
-                placeholder="Location"
-                value={newUser.location}
-                onChange={handleInputChange}
-            />
-            <button onClick={addUser}>Add User</button>
-
-            <h3>User List</h3>
-            <ul>
-                {users.map((user) => (
-                    <li key={user.id}>
-                        {user.name} - {user.role} ({user.location})
-                        <button onClick={() => deleteUser(user.id)}>Delete</button>
-                    </li>
-                ))}
-            </ul>
-            <button onClick={handleLogout}>Logout</button>
-        </div>
-    );
+        {/* Labors Section */}
+        <section id="labors">
+          <h3>Labors</h3>
+          <button>Add New Labor</button>
+          <div>
+            <div>Labor List</div>
+            <div>
+              <table className="admin-table">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {labors.map((labor, index) => (
+                    <tr key={index}>
+                      <td>{labor.name}</td>
+                      <td>{labor.email}</td>
+                      <td>
+                        <button>Update</button>
+                        <button>Delete</button>
+                        <button>View</button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  );
 };
 
 export default AdminDashboard;
