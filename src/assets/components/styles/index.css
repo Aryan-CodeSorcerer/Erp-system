@@ -1,0 +1,336 @@
+/* Admin Dashboard panel */
+.ad-panel {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+}
+
+/* Headings */
+.ad-panel h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.ad-panel h3 {
+    color: #555;
+    margin-bottom: 10px;
+}
+
+/* Input fields and select */
+.ad-panel input[type="text"],
+.ad-panel select {
+    width: calc(100% - 22px);
+    padding: 8px 10px;
+    margin: 8px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+/* Add User button */
+.ad-panel button {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 15px;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.ad-panel button:hover {
+    background-color: #0056b3;
+}
+
+/* User List */
+.ad-panel ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+.ad-panel li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    background-color: #f1f1f1;
+    margin-bottom: 8px;
+    border-radius: 4px;
+}
+
+/* Delete button */
+.ad-panel li button {
+    padding: 5px 10px;
+    color: white;
+    background-color: #dc3545;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.ad-panel li button:hover {
+    background-color: #c82333;
+}
+
+/* Logout button */
+.ad-panel > button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 20px;
+    background-color: #6c757d;
+}
+
+.ad-panel > button:hover {
+    background-color: #5a6268;
+}
+/* =======================================sales css================== */
+
+.sd-panel {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f4f6f8;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+}
+
+/* Headings */
+.sd-panel h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.sd-panel h3 {
+    color: #555;
+    margin-bottom: 10px;
+}
+
+/* Input fields */
+.sd-panel input[type="text"] {
+    width: calc(100% - 20px);
+    padding: 8px 10px;
+    margin: 8px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+/* Add Labour button */
+.sd-panel button {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 15px;
+    color: white;
+    background-color: #28a745;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.sd-panel button:hover {
+    background-color: #218838;
+}
+
+/* Labour List */
+.sd-panel ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+.sd-panel li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    background-color: #e9ecef;
+    margin-bottom: 8px;
+    border-radius: 4px;
+}
+
+/* Delete button */
+.sd-panel li button {
+    padding: 5px 10px;
+    color: white;
+    background-color: #dc3545;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.sd-panel li button:hover {
+    background-color: #c82333;
+}
+
+/* Logout button */
+.sd-panel > button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 20px;
+    background-color: #6c757d;
+}
+
+.sd-panel > button:hover {
+    background-color: #5a6268;
+}
+/* ======================labour csss======================= */
+
+/* Labour Dashboard main panel */
+.ld-panel {
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f4f6f8;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+}
+
+/* Headings */
+.ld-panel h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.ld-panel h3 {
+    color: #555;
+    margin-bottom: 10px;
+}
+
+/* Task List */
+.ld-panel ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+.ld-panel li {
+    padding: 10px;
+    background-color: #e9ecef;
+    margin-bottom: 8px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+}
+
+/* Checkbox label styling */
+.ld-panel li label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.ld-panel li input[type="checkbox"] {
+    margin-right: 10px;
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+/* Completed task styling */
+.ld-panel li input[type="checkbox"]:checked + label {
+    text-decoration: line-through;
+    color: #888;
+}
+
+/* Logout button */
+.ld-panel > button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 20px;
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.ld-panel > button:hover {
+    background-color: #5a6268;
+}
+/* =========================hr panel============= */
+/* HR Dashboard main panel */
+.hd-panel {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f9fafc;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+}
+
+/* Headings */
+.hd-panel h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.hd-panel h3 {
+    color: #555;
+    margin-bottom: 10px;
+}
+
+/* Table styling */
+.hd-panel table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+.hd-panel th, .hd-panel td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.hd-panel th {
+    background-color: #f1f1f1;
+    color: #333;
+    font-weight: bold;
+}
+
+.hd-panel tr:hover {
+    background-color: #f5f5f5;
+}
+
+.hd-panel td {
+    color: #555;
+}
+
+/* Salary formatting */
+.hd-panel td:last-child {
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+/* Logout button */
+.hd-panel > button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 20px;
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.hd-panel > button:hover {
+    background-color: #5a6268;
+}
