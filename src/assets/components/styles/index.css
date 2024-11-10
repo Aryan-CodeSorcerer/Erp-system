@@ -1,195 +1,214 @@
 /* Admin Dashboard panel */
-body, html {
+body,
+html {
     margin: 0;
     padding: 0;
     height: 100%;
     font-family: Arial, sans-serif;
-    background-color: #f0f2f5;
-  }
-  
-  .admin-dashboard {
+    background-color: #f9fafc;
+}
+
+.admin-dashboard {
     display: flex;
     flex-direction: row;
     height: 100vh;
     width: 100vw;
-  }
-  
-  /* Sidebar styling */
-  .admin-sidebar {
+}
+
+/* Sidebar styling */
+.admin-sidebar {
     width: 250px;
-    background-color: #2c3e50;
-    color: #ecf0f1;
+    background-color: #2f3542;
+    color: #ffffff;
     padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
-  }
-  
-  .admin-sidebar h5 {
+}
+
+.admin-sidebar h5 {
     font-size: 22px;
     margin-bottom: 25px;
+    color: #ffffff;
     text-align: center;
-  }
-  
-  .admin-sidebar ul {
+}
+
+.admin-sidebar ul {
     list-style: none;
     padding: 0;
     width: 100%;
-  }
-  
-  .admin-sidebar li {
+}
+
+.admin-sidebar li {
     margin: 15px 0;
-  }
-  
-  .admin-sidebar a {
-    color: #ecf0f1;
+}
+
+.admin-sidebar a {
+    color: #dcdde1;
     text-decoration: none;
     font-size: 18px;
-    padding: 10px 20px;
+    padding: 12px 20px;
     display: block;
     width: 100%;
-    border-radius: 5px;
-  }
-  
-  .admin-sidebar a:hover {
-    background-color: #34495e;
-  }
-  
-  /* Main Content Styling */
-  .admin-main-content {
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.admin-sidebar a:hover {
+    background-color: #3d3d59;
+}
+
+.logout-button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 30px;
+    font-size: 16px;
+    color: #ffffff;
+    background-color: #e84118;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.logout-button:hover {
+    background-color: #c23616;
+}
+
+/* Main Content Styling */
+.admin-main-content {
     flex: 1;
-    background-color: white;
+    background-color: #ffffff;
     padding: 30px;
     overflow-y: auto;
-  }
-  
-  .admin-main-content h3 {
+}
+
+.admin-main-content h3 {
     font-size: 24px;
     margin-bottom: 20px;
-    color: #34495e;
-  }
-  
-  .admin-main-content button {
-    background-color: #3498db;
-    color: white;
+    color: #333333;
+}
+
+.admin-main-content button {
+    background-color: #4a69bd;
+    color: #ffffff;
     border: none;
     padding: 10px 20px;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
     margin-bottom: 20px;
-  }
-  
-  .admin-main-content button:hover {
-    background-color: #2980b9;
-  }
-  
-  /* Table Styling */
-  .admin-table {
+    transition: background-color 0.3s ease;
+}
+
+.admin-main-content button:hover {
+    background-color: #3b3b98;
+}
+
+/* Table Styling */
+.admin-table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
-  }
-  
-  .admin-table th, .admin-table td {
-    border: 1px solid #ddd;
+    font-size: 16px;
+}
+
+.admin-table th,
+.admin-table td {
+    border: 1px solid #ebebeb;
     padding: 15px;
     text-align: left;
-  }
-  
-  .admin-table th {
-    background-color: #3498db;
-    color: white;
-  }
-  
-  .admin-table tr:nth-child(even) {
-    background-color: #f2f2f2;
-  }
-  
-  .admin-table tr:hover {
-    background-color: #e1eaf5;
-  }
-  
-  .admin-table td button {
+}
+
+.admin-table th {
+    background-color: #4a69bd;
+    color: #ffffff;
+}
+
+.admin-table tr:nth-child(even) {
+    background-color: #f7f7f7;
+}
+
+.admin-table tr:hover {
+    background-color: #e8f0ff;
+}
+
+.admin-table td button {
     background-color: #e74c3c;
-    color: white;
+    color: #ffffff;
     border: none;
-    padding: 7px 12px;
-    border-radius: 5px;
+    padding: 8px 14px;
+    border-radius: 6px;
     cursor: pointer;
-  }
-  
-  .admin-table td button:hover {
+    transition: background-color 0.3s ease;
+}
+
+.admin-table td button:hover {
     background-color: #c0392b;
-  }
-  
-  /* Responsive Styles */
-  @media (max-width: 768px) {
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
     .admin-dashboard {
-      flex-direction: column;
+        flex-direction: column;
     }
-  
+
     .admin-sidebar {
-      width: 100%;
-      height: auto;
-      padding: 10px;
+        width: 100%;
+        height: auto;
+        padding: 15px;
     }
-  
+
     .admin-sidebar h5 {
-      font-size: 20px;
-      margin-bottom: 15px;
+        font-size: 20px;
+        margin-bottom: 15px;
     }
-  
+
     .admin-sidebar ul {
-      display: flex;
-      justify-content: space-around;
+        display: flex;
+        justify-content: space-around;
     }
-  
+
     .admin-sidebar a {
-      padding: 10px;
-      font-size: 16px;
+        padding: 10px;
+        font-size: 16px;
     }
-  
+
     .admin-main-content {
-      padding: 20px;
+        padding: 20px;
     }
-  
     .admin-main-content h3 {
-      font-size: 20px;
+        font-size: 20px;
     }
-  
     .admin-main-content button {
-      padding: 8px 16px;
+        padding: 8px 16px;
     }
-  
-    .admin-table th, .admin-table td {
-      padding: 10px;
+    .admin-table th,
+    .admin-table td {
+        padding: 10px;
     }
-  }
-  
-  @media (max-width: 480px) {
+}
+@media (max-width: 480px) {
     .admin-main-content h3 {
-      font-size: 18px;
+        font-size: 18px;
     }
-  
     .admin-sidebar a {
-      font-size: 14px;
-      padding: 8px;
+        font-size: 14px;
+        padding: 8px;
     }
-  
     .admin-main-content button {
-      padding: 6px 12px;
-      font-size: 14px;
+        padding: 6px 12px;
+        font-size: 14px;
     }
-  
     .admin-table {
-      font-size: 14px;
+        font-size: 14px;
     }
-  
-    .admin-table th, .admin-table td {
-      padding: 8px;
+    .admin-table th,
+    .admin-table td {
+        padding: 8px;
     }
-  }
-  
+}
+
 /* =======================================sales css================== */
 
 .sd-panel {
@@ -273,16 +292,17 @@ body, html {
 }
 
 /* Logout button */
-.sd-panel > button {
+.sd-panel>button {
     width: 100%;
     padding: 10px;
     margin-top: 20px;
     background-color: #6c757d;
 }
 
-.sd-panel > button:hover {
+.sd-panel>button:hover {
     background-color: #5a6268;
 }
+
 /* ======================labour csss======================= */
 
 /* Labour Dashboard main panel */
@@ -339,13 +359,13 @@ body, html {
 }
 
 /* Completed task styling */
-.ld-panel li input[type="checkbox"]:checked + label {
+.ld-panel li input[type="checkbox"]:checked+label {
     text-decoration: line-through;
     color: #888;
 }
 
 /* Logout button */
-.ld-panel > button {
+.ld-panel>button {
     width: 100%;
     padding: 10px;
     margin-top: 20px;
@@ -357,9 +377,10 @@ body, html {
     font-size: 16px;
 }
 
-.ld-panel > button:hover {
+.ld-panel>button:hover {
     background-color: #5a6268;
 }
+
 /* =========================hr panel============= */
 /* HR Dashboard main panel */
 .hd-panel {
@@ -391,7 +412,8 @@ body, html {
     margin-top: 15px;
 }
 
-.hd-panel th, .hd-panel td {
+.hd-panel th,
+.hd-panel td {
     padding: 12px;
     text-align: left;
     border-bottom: 1px solid #ddd;
@@ -418,7 +440,7 @@ body, html {
 }
 
 /* Logout button */
-.hd-panel > button {
+.hd-panel>button {
     width: 100%;
     padding: 10px;
     margin-top: 20px;
@@ -430,8 +452,8 @@ body, html {
     font-size: 16px;
 }
 
-.hd-panel > button:hover {
+.hd-panel>button:hover {
     background-color: #5a6268;
 }
-/* ====================================================== */
 
+/* ====================================================== */
