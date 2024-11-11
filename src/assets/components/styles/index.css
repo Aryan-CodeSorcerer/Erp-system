@@ -306,79 +306,201 @@ html {
 /* ======================labour csss======================= */
 
 /* Labour Dashboard main panel */
+/* General styling for the Labour Dashboard */
 .ld-panel {
-    max-width: 500px;
+    max-width: 600px;
     margin: 20px auto;
     padding: 20px;
-    background-color: #f4f6f8;
     border-radius: 8px;
+    background-color: #f9f9f9;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    font-family: Arial, sans-serif;
 }
 
-/* Headings */
+/* Header */
 .ld-panel h2 {
     text-align: center;
     color: #333;
-    margin-bottom: 15px;
 }
 
-.ld-panel h3 {
-    color: #555;
-    margin-bottom: 10px;
+/* Task form styling */
+.task-form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
 }
 
-/* Task List */
-.ld-panel ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 20px 0;
-}
-
-.ld-panel li {
+.task-input {
+    flex: 1;
     padding: 10px;
-    background-color: #e9ecef;
-    margin-bottom: 8px;
-    border-radius: 4px;
-    display: flex;
-    align-items: center;
-}
-
-/* Checkbox label styling */
-.ld-panel li label {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
     font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
 }
 
-.ld-panel li input[type="checkbox"] {
-    margin-right: 10px;
-    transform: scale(1.2);
-    cursor: pointer;
-}
-
-/* Completed task styling */
-.ld-panel li input[type="checkbox"]:checked+label {
-    text-decoration: line-through;
-    color: #888;
-}
-
-/* Logout button */
-.ld-panel>button {
-    width: 100%;
-    padding: 10px;
-    margin-top: 20px;
-    background-color: #6c757d;
-    color: white;
+.add-task-button {
+    padding: 10px 15px;
+    background-color: #4CAF50;
+    color: #fff;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     font-size: 16px;
+    transition: background-color 0.3s;
 }
 
-.ld-panel>button:hover {
-    background-color: #5a6268;
+.add-task-button:hover {
+    background-color: #45a049;
+}
+
+/* Task list */
+.task-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.task-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* Task description and actions */
+.task-description {
+    flex: 1;
+    font-size: 16px;
+    color: #333;
+}
+
+.task-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.status-button,
+.edit-button,
+.delete-button,
+.save-button,
+.cancel-button {
+    padding: 5px 10px;
+    font-size: 14px;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+/* Button colors */
+.status-button {
+    background-color: #2196F3;
+    color: #fff;
+}
+
+.status-button:hover {
+    background-color: #0b7dda;
+}
+
+.edit-button {
+    background-color: #ff9800;
+    color: #fff;
+}
+
+.edit-button:hover {
+    background-color: #fb8c00;
+}
+
+.delete-button {
+    background-color: #f44336;
+    color: #fff;
+}
+
+.delete-button:hover {
+    background-color: #e53935;
+}
+
+.save-button {
+    background-color: #4CAF50;
+    color: #fff;
+}
+
+.save-button:hover {
+    background-color: #45a049;
+}
+
+.cancel-button {
+    background-color: #9E9E9E;
+    color: #fff;
+}
+
+.cancel-button:hover {
+    background-color: #757575;
+}
+
+/* Logout button */
+.logout-button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #f44336;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.logout-button:hover {
+    background-color: #e53935;
+}
+
+/* Edit input field */
+.edit-input {
+    flex: 1;
+    padding: 5px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+/* Responsive styling */
+@media (max-width: 768px) {
+    .task-form {
+        flex-direction: column;
+    }
+
+    .task-actions {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .task-input, .add-task-button {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .ld-panel {
+        padding: 10px;
+    }
+
+    .task-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .task-description {
+        margin-bottom: 8px;
+    }
+
+    .logout-button {
+        font-size: 14px;
+    }
 }
 
 /* =========================hr panel============= */
