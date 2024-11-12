@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-// import '../styles/LabourDashboard.css'; // Separate CSS for custom styling
+
 
 const LabourDashboard = () => {
     const navigate = useNavigate();

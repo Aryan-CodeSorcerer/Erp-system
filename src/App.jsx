@@ -8,7 +8,7 @@ import LabourDashboard from './assets/components/dashboards/LabourDashboard';
 
 function App() {
     return (
-        <Routes>  {/* Define your routes here */}
+        <Routes> 
             <Route path="/" element={<LoginPage />} />
             <Route path="/admin" element={<AdminDashboard />} />
             <Route path="/sales-manager" element={<SalesManagerDashboard />} />

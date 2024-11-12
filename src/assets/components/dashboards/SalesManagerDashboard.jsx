@@ -1,118 +1,175 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+// import axios from 'axios';
 import '../styles/index.css';
 
 const SalesManagerDashboard = () => {
-    const [labours, setLabours] = useState({
-        Noida: [
-            { id: 1, name: 'Labour A', inTime: '9:00 AM', outTime: '5:00 PM' },
-        ],
-        Delhi: [
-            { id: 2, name: 'Labour B', inTime: '10:00 AM', outTime: '6:00 PM' },
-        ],
-        GreaterNoida: [],
+    const [tasks, setTasks] = useState({ Noida: [], Delhi: [], GreaterNoida: [] });
+    const [newTask, setNewTask] = useState({
+        taskName: '',
+        assignedTo: '',
+        assignedBy: '',
+        work: '',
+        area: 'Noida',
+        status: 'not started',
+        startDate: '',
+        dueDate: '',
     });
-    const [newLabour, setNewLabour] = useState({ name: '', inTime: '', outTime: '', area: 'Noida' });
-    const [editing, setEditing] = useState(false); // Track if editing mode is on
-    const [currentLabour, setCurrentLabour] = useState(null); // Track which labour is being edited
+    const [editing, setEditing] = useState(false);
+    const [currentTask, setCurrentTask] = useState(null);
+
+    const [laborTimes, setLaborTimes] = useState([]);
+    const [newLabor, setNewLabor] = useState({
+        name: '',
+        inTime: '',
+        outTime: ''
+    });
+
     const navigate = useNavigate();
 
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setNewLabour((prev) => ({ ...prev, [name]: value }));
-    };
+    useEffect(() => { fetchTasks(); }, []);
 
-    const addLabour = () => {
-        if (editing) {
-            // Update existing labour
-            setLabours((prev) => ({
-                ...prev,
-                [newLabour.area]: prev[newLabour.area].map((labour) =>
-                    labour.id === currentLabour.id ? { ...currentLabour, ...newLabour } : labour
-                ),
-            }));
-            setEditing(false);
-            setCurrentLabour(null);
-        } else {
-            // Add new labour
-            setLabours((prev) => ({
-                ...prev,
-                [newLabour.area]: [
-                    ...prev[newLabour.area],
-                    { ...newLabour, id: prev[newLabour.area].length + 1 },
-                ],
-            }));
+    const fetchTasks = async () => {
+        try {
+            const { data } = await axios.get('http://localhost:9000/salemanger/alltasks');
+            setTasks(groupTasksByArea(data));
+        } catch (error) {
+            console.error('Error fetching tasks:', error);
         }
-        setNewLabour({ name: '', inTime: '', outTime: '', area: 'Noida' });
     };
 
-    const deleteLabour = (area, id) => {
-        setLabours((prev) => ({
-            ...prev,
-            [area]: prev[area].filter((labour) => labour.id !== id),
-        }));
+    const groupTasksByArea = (tasksData) => {
+        return tasksData.reduce((acc, task) => {
+            const area = task.area || 'Noida';
+            if (!acc[area]) acc[area] = [];
+            acc[area].push(task);
+            return acc;
+        }, {});
     };
 
-    const editLabour = (area, labour) => {
-        setEditing(true);
-        setCurrentLabour(labour);
-        setNewLabour({ ...labour, area });
+    const handleTaskInputChange = (e) => setNewTask({ ...newTask, [e.target.name]: e.target.value });
+
+    const addTask = async () => {
+        if (!newTask.taskName || !newTask.assignedTo || !newTask.assignedBy || !newTask.startDate || !newTask.dueDate || !newTask.work) {
+            return alert('Please fill in all fields.');
+        }
+
+        const taskToSave = editing ? { ...newTask, _id: currentTask?._id } : newTask;
+
+        if (editing && !taskToSave._id) {
+            console.error("Current task ID is missing.");
+            return alert("Cannot update task without an ID.");
+        }
+
+        try {
+            const response = editing
+                ? await axios.put(`http://localhost:9000/salemanger/alltasks/${taskToSave._id}`, taskToSave)
+                : await axios.post('http://localhost:9000/salemanger/alltasks', taskToSave);
+
+            setTasks((prev) => {
+                const areaTasks = prev[taskToSave.area] || [];
+                return {
+                    ...prev,
+                    [taskToSave.area]: editing
+                        ? areaTasks.map((task) => task._id === taskToSave._id ? taskToSave : task)
+                        : [...areaTasks, taskToSave],
+                };
+            });
+
+            resetTaskForm();
+            fetchTasks();
+        } catch (error) {
+            console.error('Error saving task:', error);
+        }
     };
 
-    const handleLogout = () => {
-        navigate('/');
+    const resetTaskForm = () => {
+        setNewTask({
+            taskName: '',
+            assignedTo: '',
+            assignedBy: '',
+            work: '',
+            area: 'Noida',
+            status: 'not started',
+            startDate: '',
+            dueDate: '',
+        });
+        setEditing(false);
+        setCurrentTask(null);
     };
+
+    // const handleLaborInputChange = (e) => setNewLabor({ ...newLabor, [e.target.name]: e.target.value });
+
+    // const addLaborTime = () => {
+    //     if (!newLabor.name || !newLabor.inTime || !newLabor.outTime) {
+    //         return alert('Please fill in all labor fields.');
+    //     }
+    //     setLaborTimes([...laborTimes, newLabor]);
+    //     setNewLabor({ name: '', inTime: '', outTime: '' });
+    // };
 
     return (
-        <div className='sd-panel'>
-            <h2>Sales Manager Dashboard</h2>
-
-            <h3>{editing ? 'Edit Labour' : 'Add New Labour'}</h3>
-            <input
-                type="text"
-                name="name"
-                placeholder="Labour Name"
-                value={newLabour.name}
-                onChange={handleInputChange}
-            />
-            <input
-                type="text"
-                name="inTime"
-                placeholder="In Time"
-                value={newLabour.inTime}
-                onChange={handleInputChange}
-            />
-            <input
-                type="text"
-                name="outTime"
-                placeholder="Out Time"
-                value={newLabour.outTime}
-                onChange={handleInputChange}
-            />
-            <select name="area" value={newLabour.area} onChange={handleInputChange}>
-                <option value="Noida">Noida</option>
-                <option value="Delhi">Delhi</option>
-                <option value="GreaterNoida">Greater Noida</option>
-            </select>
-            <button onClick={addLabour}>{editing ? 'Update Labour' : 'Add Labour'}</button>
-
-            <h3>Labour Attendance by Area</h3>
-            {Object.keys(labours).map((area) => (
-                <div key={area}>
-                    <h4>{area}</h4>
-                    <ul>
-                        {labours[area].map((labour) => (
-                            <li key={labour.id}>
-                                {labour.name} - In: {labour.inTime}, Out: {labour.outTime}
-                                <button onClick={() => editLabour(area, labour)}>Update</button>
-                                <button onClick={() => deleteLabour(area, labour.id)}>Delete</button>
-                            </li>
-                        ))}
-                    </ul>
+        <div className="dashboard-container">
+            <div className="sales-dashboard">
+                <h2>Sales Manager Dashboard</h2>
+                <div>
+                    <h3>{editing ? 'Edit Task' : 'Add New Task'}</h3>
+                    <input type="text" name="taskName" placeholder="Task Name" value={newTask.taskName} onChange={handleTaskInputChange} />
+                    <input type="text" name="assignedTo" placeholder="Assigned To" value={newTask.assignedTo} onChange={handleTaskInputChange} />
+                    <input type="text" name="assignedBy" placeholder="Assigned By" value={newTask.assignedBy} onChange={handleTaskInputChange} />
+                    <input type="text" name="work" placeholder="Work Description" value={newTask.work} onChange={handleTaskInputChange} />
+                    <select name="area" value={newTask.area} onChange={handleTaskInputChange}>
+                        <option value="Noida">Noida</option>
+                        <option value="Delhi">Delhi</option>
+                        <option value="GreaterNoida">Greater Noida</option>
+                    </select>
+                    <input type="date" name="startDate" value={newTask.startDate} onChange={handleTaskInputChange} />
+                    <input type="date" name="dueDate" value={newTask.dueDate} onChange={handleTaskInputChange} />
+                    <select name="status" value={newTask.status} onChange={handleTaskInputChange}>
+                        <option value="not started">Not Started</option>
+                        <option value="in-process">In Process</option>
+                        <option value="completed">Completed</option>
+                    </select>
+                    <button onClick={addTask}>{editing ? 'Update Task' : 'Add Task'}</button>
                 </div>
-            ))}
 
-            <button onClick={handleLogout}>Logout</button>
+                <div>
+                    <h3>Task List by Area</h3>
+                    {Object.keys(tasks).map((area) => (
+                        <div key={area}>
+                            <h4>{area}</h4>
+                            <ul>
+                                {tasks[area].map((task) => (
+                                    <li key={task._id}>
+                                        {`${task.taskName} - Assigned To: ${task.assignedTo}, Status: ${task.status}, Work: ${task.work}`}
+                                        <button onClick={() => editTask(area, task)}>Edit</button>
+                                        <button onClick={() => deleteTask(area, task._id)}>Delete</button>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    ))}
+                </div>
+
+                <button onClick={() => navigate('/')}>Logout</button>
+            </div>
+
+            <div className="labor-dashboard">
+                <h2>Labor In/Out Time Dashboard</h2>
+                {/* <input type="text" name="name" placeholder="Labor Name" value={newLabor.name} onChange={handleLaborInputChange} />
+                <input type="time" name="inTime" value={newLabor.inTime} onChange={handleLaborInputChange} />
+                <input type="time" name="outTime" value={newLabor.outTime} onChange={handleLaborInputChange} />
+                <button onClick={addLaborTime}>Add Labor Time</button> */}
+
+                <h4>Labor Time Records</h4>
+                <ul>
+                    {laborTimes.map((labor, index) => (
+                        <li key={index}>
+                            {`${labor.name} - In: ${labor.inTime}, Out: ${labor.outTime}`}
+                        </li>
+                    ))}
+                </ul>
+            </div>
         </div>
     );
 };

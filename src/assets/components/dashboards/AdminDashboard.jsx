@@ -19,14 +19,14 @@ const AdminDashboard = () => {
   const navigate = useNavigate();
 
   const handleAddManager = () => {
-    setIsAddManagerVisible(!isAddManagerVisible);
+    setIsAddManagerVisible(true);
     setEditingManagerIndex(null); // Reset editing mode
     setManagerName('');
     setManagerEmail('');
   };
 
   const handleAddLabor = () => {
-    setIsAddLaborVisible(!isAddLaborVisible);
+    setIsAddLaborVisible(true);
     setEditingLaborIndex(null); // Reset editing mode
     setLaborName('');
     setLaborEmail('');

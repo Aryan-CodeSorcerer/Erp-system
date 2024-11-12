@@ -209,100 +209,6 @@ html {
     }
 }
 
-/* =======================================sales css================== */
-
-.sd-panel {
-    max-width: 600px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #f4f6f8;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    font-family: Arial, sans-serif;
-}
-
-/* Headings */
-.sd-panel h2 {
-    text-align: center;
-    color: #333;
-    margin-bottom: 10px;
-}
-
-.sd-panel h3 {
-    color: #555;
-    margin-bottom: 10px;
-}
-
-/* Input fields */
-.sd-panel input[type="text"] {
-    width: calc(100% - 20px);
-    padding: 8px 10px;
-    margin: 8px 0;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 16px;
-}
-
-/* Add Labour button */
-.sd-panel button {
-    display: inline-block;
-    margin-top: 10px;
-    padding: 10px 15px;
-    color: white;
-    background-color: #28a745;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-.sd-panel button:hover {
-    background-color: #218838;
-}
-
-/* Labour List */
-.sd-panel ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 20px 0;
-}
-
-.sd-panel li {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 8px;
-    background-color: #e9ecef;
-    margin-bottom: 8px;
-    border-radius: 4px;
-}
-
-/* Delete button */
-.sd-panel li button {
-    padding: 5px 10px;
-    color: white;
-    background-color: #dc3545;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.sd-panel li button:hover {
-    background-color: #c82333;
-}
-
-/* Logout button */
-.sd-panel>button {
-    width: 100%;
-    padding: 10px;
-    margin-top: 20px;
-    background-color: #6c757d;
-}
-
-.sd-panel>button:hover {
-    background-color: #5a6268;
-}
-
 /* ======================labour csss======================= */
 
 /* Labour Dashboard main panel */
@@ -578,4 +484,140 @@ html {
     background-color: #5a6268;
 }
 
-/* ====================================================== */
+/* ==========================salesss csss============================ */
+.dashboard-container {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+}
+
+.sales-dashboard, .labor-dashboard {
+    flex: 1;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.sales-dashboard {
+    background-color: #f9f9f9;
+}
+
+.labor-dashboard {
+    background-color: #e9f7ef;
+}
+
+/* Container for both dashboards */
+.dashboard-container {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    background-color: #f4f7fa;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+}
+
+/* Sales Dashboard and Labor Dashboard styling */
+.sales-dashboard, .labor-dashboard {
+    flex: 1;
+    border: 2px solid #dde4ec;
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Dashboard Headers */
+.sales-dashboard h2, .labor-dashboard h2 {
+    color: #1e2a39;
+    font-size: 1.8rem;
+    font-weight: 600;
+    border-bottom: 2px solid #dde4ec;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+/* Form and input styling */
+.sales-dashboard input, .sales-dashboard select, .labor-dashboard input, .labor-dashboard button, .sales-dashboard button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #cbd2d9;
+    border-radius: 8px;
+    font-size: 1rem;
+    background-color: #f9f9f9;
+}
+
+.sales-dashboard select, .labor-dashboard input[type="time"] {
+    font-family: inherit;
+    cursor: pointer;
+}
+
+/* Button styles */
+button {
+    background-color: #007bff;
+    color: k #000000;
+    border: none;
+    padding: 12px;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Task and labor list styling */
+.sales-dashboard ul, .labor-dashboard ul {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 10px;
+}
+
+.sales-dashboard li, .labor-dashboard li {
+    background-color: #f1f5f9;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #3a4a5b;
+    font-size: 0.9rem;
+}
+
+.sales-dashboard button, .labor-dashboard button {
+    margin-top: 10px;
+    width: auto;
+}
+
+/* Edit and Delete button styles */
+.sales-dashboard li button {
+    background-color: #ff7043;
+    padding: 6px 12px;
+    font-size: 0.8rem;
+    border-radius: 4px;
+}
+
+.sales-dashboard li button:hover {
+    background-color: #d95228;
+}
+
+/* Logout Button */
+.sales-dashboard button.logout-btn {
+    background-color: #ff4757;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.logout-btn:hover {
+    background-color: #d32f2f;
+}
+
+/* Media query for responsive layout */
+@media (max-width: 768px) {
+    .dashboard-container {
+        flex-direction: column;
+    }
+}
